@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Helpet - Conectando Doadores e Voluntários</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐾%3C/text%3E%3C/svg%3E">
 
@@ -45,7 +45,7 @@
             --light-green-bg: #111111;
         }
 
-        body.blue-light { filter: sepia(0.2) hue-rotate(-10deg); }
+        body.blue-light::after { content: ''; position: fixed; inset: 0; background: rgba(255,140,0,.12); mix-blend-mode: multiply; pointer-events: none; z-index: 999; }
 
         html { font-size: var(--font-scale); }
 
@@ -88,7 +88,7 @@
 
         .user-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #ddd; object-fit: cover; }
         .notification-icon { position: relative; color: var(--text-color); margin-right: 15px; cursor: pointer; }
-        .notification-badge { position: absolute; top: -2px; right: -2px; background: var(--error-red); width: 8px; height: 8px; border-radius: 50%; }
+        .notification-badge { position: absolute; top: -7px; right: -9px; background: var(--error-red); color: #fff; font-size: 0.65rem; font-weight: bold; min-width: 16px; height: 16px; padding: 0 4px; box-sizing: border-box; border-radius: 10px; display: flex; align-items: center; justify-content: center; line-height: 1; }
 
         .search-box { background-color: #F5F5F5; border-radius: 20px; padding: 12px 20px; display: flex; align-items: center; color: var(--text-muted); margin-bottom: 20px; }
         body.dark-mode .search-box { background-color: #2A2A2A; }
@@ -153,13 +153,13 @@
         .password-reqs li.valid { color: var(--success-green); }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-        .bottom-nav { position: absolute; bottom: 0; width: 100%; background-color: var(--card-bg); border-top: 1px solid var(--input-border); display: flex; justify-content: space-around; align-items: center; padding: 8px 0 15px 0; z-index: 10; box-sizing: border-box; }
+        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background-color: var(--card-bg); border-top: 1px solid var(--input-border); display: grid; grid-template-columns: repeat(5, 1fr); justify-items: center; align-items: center; padding: 8px 0 15px 0; z-index: 50; box-sizing: border-box; }
         body.in-chat .bottom-nav { display: none; }
         .nav-item { background: none; border: none; color: var(--text-muted); font-size: 0.75rem; display: flex; flex-direction: column; align-items: center; gap: 4px; width: auto; margin: 0; padding: 5px; text-decoration: none; cursor: pointer; }
         .nav-item svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; }
         .nav-item.active { color: var(--primary-green); font-weight: bold; }
 
-        .nav-add-btn { background: var(--card-bg); border: 2px solid var(--primary-orange); color: var(--primary-orange); border-radius: 50%; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; margin-top: -30px; font-size: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; flex-shrink: 0; padding: 0; line-height: 1; }
+        .nav-add-btn { background: var(--card-bg); border: 2px solid var(--primary-orange); color: var(--primary-orange); border-radius: 50%; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; margin-top: -6px; font-size: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; flex-shrink: 0; padding: 0; line-height: 1; }
         .nav-badge-wrapper { position: relative; }
         .nav-badge { position: absolute; top: -4px; right: -8px; background: var(--error-red); color: white; font-size: 0.6rem; border-radius: 10px; padding: 2px 5px; min-width: 8px; text-align: center; }
 
@@ -321,6 +321,59 @@
         .bb-pin { width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 3px solid currentColor; box-shadow: 0 3px 10px rgba(0,0,0,.3); display: flex; align-items: center; justify-content: center; }
         .bb-pin.cheio { color: #20B2AA; } .bb-pin.razoavel { color: #FF8C00; } .bb-pin.vazio { color: #E53935; }
         #modal-bb select.form-control { padding-left: 14px; }
+    .gear-btn { background: none; border: none; color: var(--text-color); width: 40px; margin: 0; padding: 0; justify-self: end; cursor: pointer; }
+        #chat-anexar { background: transparent; color: var(--primary-green); border: 1px solid var(--input-border); }
+        .chat-img { max-width: 100%; max-height: 260px; border-radius: 12px; display: block; margin-bottom: 4px; }
+    .mapa-busca { position: relative; z-index: 600; padding: 0 24px 12px; }
+        .mapa-resultados { position: absolute; left: 24px; right: 24px; top: 100%; margin-top: -6px; background: var(--card-bg); border: 1px solid var(--input-border); border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.2); max-height: 260px; overflow-y: auto; }
+        .mapa-res-item { padding: 10px 14px; border-bottom: 1px solid var(--input-border); cursor: pointer; font-size: 0.9rem; }
+        .mapa-res-item:last-child { border-bottom: none; }
+        .mapa-res-item small { display: block; color: var(--text-muted); font-size: 0.75rem; }
+    .pet-pin { width: 44px; height: 44px; border-radius: 50%; border: 3px solid #7E57C2; background: #fff; box-shadow: 0 3px 10px rgba(0,0,0,.3); overflow: hidden; }
+        .pet-pin img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .lg-item { cursor: pointer; user-select: none; -webkit-user-select: none; padding: 3px 0; transition: opacity .2s; }
+        .lg-item.off { opacity: .35; text-decoration: line-through; }
+    html, body { height: 100%; }
+        body { min-height: 100dvh; }
+        .app-container { max-width: none !important; min-height: 100dvh; }
+        .bottom-nav { max-width: none !important; left: 0 !important; transform: none !important; padding-bottom: calc(15px + env(safe-area-inset-bottom)); }
+        body.dark-mode .logo-img, body.dark-mode .logo-img-full, body.high-contrast .logo-img, body.high-contrast .logo-img-full { background: transparent !important; padding: 0 !important; border-radius: 0 !important; filter: drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff); }
+        #app-nova-adocao .top-bar-grid h2, #app-nova-campanha .top-bar-grid h2 { text-align: left; }
+        #app-chat-room:not(.hidden) { position: fixed; top: 0; left: 0; right: 0; height: var(--vh, 100dvh); z-index: 60; background: var(--bg-color); }
+        #chat-anexar, #chat-camera, #chat-mic { width: 40px !important; height: 40px !important; background: transparent; color: var(--primary-green); border: 1px solid var(--input-border); }
+        #chat-mic.gravando { background: var(--error-red); color: #fff; border-color: var(--error-red); }
+        .chat-img, #pet-img, #pf-foto { cursor: zoom-in; }
+        .toast-notif { position: fixed; top: 12px; left: 12px; right: 12px; z-index: 300; background: var(--card-bg); color: var(--text-color); border: 1px solid var(--primary-green); border-radius: 14px; padding: 12px 16px; box-shadow: 0 6px 20px rgba(0,0,0,.3); font-size: .9rem; }
+    .chat-baixar { display: block; font-size: .75rem; text-decoration: underline; color: inherit; opacity: .85; margin-bottom: 4px; }
+    body.teclado .bottom-nav { display: none; }
+        body.teclado .screen-with-nav { padding-bottom: 45vh; }
+        textarea.form-control { min-height: 110px; }
+        .thumbs { display: flex; gap: 8px; margin: -10px 0 12px; flex-wrap: wrap; }
+        .thumb { position: relative; width: 78px; height: 78px; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; border: 2px solid var(--input-border); }
+        .thumb button { position: absolute; top: -6px; right: -6px; width: 24px; height: 24px; padding: 0; margin: 0; border-radius: 50%; background: var(--error-red); color: #fff; font-size: .7rem; }
+        .thumb span { position: absolute; left: 4px; bottom: 4px; background: var(--primary-green); color: #fff; font-size: .6rem; padding: 1px 6px; border-radius: 8px; }
+        .galeria { display: flex; gap: 8px; margin: -4px 0 14px; overflow-x: auto; }
+        .galeria img { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid var(--input-border); flex-shrink: 0; }
+        .item-ico { width: auto; margin: 0; padding: 2px 6px; background: transparent; border: 1px dashed var(--input-border); border-radius: 10px; font-size: 1.2rem; color: inherit; }
+        .item-del { width: 34px; height: 34px; margin: 0 0 0 8px; padding: 0; border-radius: 50%; background: transparent; border: 1px solid var(--input-border); color: var(--error-red); flex-shrink: 0; }
+        .pf-item-edit span .item-ico { width: auto; height: auto; color: inherit; border-radius: 10px; padding: 2px 6px; border: 1px dashed var(--input-border); }
+        .icone-op { width: auto; margin: 0; padding: 8px; background: transparent; border: 1px solid var(--input-border); border-radius: 12px; font-size: 1.6rem; }
+        .pf-banner { position: relative; height: 130px; border-radius: 16px; background: linear-gradient(135deg, var(--primary-green), var(--primary-orange)) center/cover no-repeat; margin-bottom: -52px; }
+        .pf-banner-btn { position: absolute; right: 8px; bottom: 8px; width: auto; margin: 0; padding: 6px 12px; border-radius: 14px; font-size: .75rem; background: rgba(0,0,0,.55); color: #fff; }
+        .pf-topo .pf-foto { z-index: 1; }
+        #lista-pets { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 12px; }
+        #lista-pets > p { grid-column: 1 / -1; }
+        .pet-card { background: var(--card-bg); border: 1px solid var(--input-border); border-radius: 16px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,.08); display: flex; flex-direction: column; }
+        .pet-card-img { position: relative; aspect-ratio: 1 / 1; background: #eee; }
+        .pet-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .pet-card-time { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,.6); color: #fff; font-size: .65rem; padding: 3px 8px; border-radius: 10px; }
+        .pet-card-body { padding: 10px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+        .pet-card-body h3 { margin: 0; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .pet-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+        .pet-chip { font-size: .65rem; color: var(--primary-green); border: 1px solid var(--primary-green); border-radius: 10px; padding: 1px 8px; }
+        .pet-card-loc { font-size: .72rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .pet-card-btn { margin-top: auto; padding: 10px; font-size: .8rem; }
 
         /* ===== Leitura de tela: só aparece no celular ===== */
         .so-mobile { display: block; }
@@ -329,25 +382,29 @@
         @media (min-width: 768px) {
             body { display: block; }
             .so-mobile { display: none !important; }
-            .app-container { max-width: none; box-shadow: none; }
+            .app-container { box-shadow: none; }
             .app-container > .screen { max-width: 520px; width: 100%; margin: 6vh auto; flex: 0 0 auto; border: 1px solid var(--input-border); border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); padding: 40px; box-sizing: border-box; overflow: visible; }
             .app-container > .screen.hidden { display: none !important; }
 
             #logged-area { margin-left: 240px; }
             #logged-area .screen { max-width: 1100px; width: 100%; margin: 0 auto; padding: 32px 40px; box-sizing: border-box; }
-            #logged-area .screen-with-nav { padding-bottom: 40px; }
+            #logged-area .screen-with-nav, body.teclado .screen-with-nav { padding-bottom: 40px !important; }
             #app-nova-adocao, #app-nova-campanha, #app-add-menu, #app-doacao-revisao,
             #app-doacao-confirma, #app-doacao-sucesso { max-width: 640px !important; }
             #app-settings { max-width: 720px !important; }
-            #app-chat-room { max-width: 900px !important; padding: 0 !important; height: 100vh; }
 
-            .bottom-nav { position: fixed; left: 0; top: 0; bottom: 0; width: 240px; height: 100vh; flex-direction: column; justify-content: flex-start; align-items: stretch; gap: 6px; padding: 28px 14px; border-top: none; border-right: 1px solid var(--input-border); z-index: 50; }
-            body.in-chat .bottom-nav { display: flex; }
+            /* menu inferior vira barra lateral */
+            .bottom-nav, body.in-chat .bottom-nav, body.teclado .bottom-nav { display: flex !important; flex-direction: column; justify-content: flex-start; align-items: stretch; gap: 6px; position: fixed; left: 0 !important; top: 0; bottom: 0; transform: none !important; width: 240px; max-width: 240px !important; height: 100vh; padding: 28px 14px !important; border-top: none; border-right: 1px solid var(--input-border); z-index: 70; }
             .nav-item { flex-direction: row; justify-content: flex-start; gap: 14px; width: 100%; padding: 12px 16px; font-size: 1rem; border-radius: 12px; box-sizing: border-box; }
-            .nav-item:hover { background: var(--light-green-bg); }
-            .nav-item.active { background: var(--light-green-bg); }
+            .nav-item:hover, .nav-item.active { background: var(--light-green-bg); }
             .nav-add-btn { order: 10; width: 100%; height: auto; border-radius: 12px; margin: 14px 0 0 0; padding: 12px; font-size: 1rem; box-shadow: none; }
             .nav-add-btn::after { content: " Nova doação / campanha"; font-size: 0.95rem; font-weight: 600; }
+
+            /* conversa ao lado do menu */
+            #app-chat-room:not(.hidden) { left: 240px; max-width: none !important; padding: 0 !important; }
+            #app-chat-room .chat-room-wrap { max-width: 900px; margin: 0 auto; border-left: 1px solid var(--input-border); border-right: 1px solid var(--input-border); }
+
+            .toast-notif { left: auto; right: 24px; width: 380px; }
 
             #lista-pets, #conteudo-campanhas { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; align-items: start; }
             #conteudo-campanhas.hidden { display: none !important; }
@@ -439,6 +496,7 @@
         </div>
         <div class="form-group">
             <label for="reg-rua">Endereço</label>
+            <input type="hidden" id="reg-cidade"><input type="hidden" id="reg-uf">
             <div class="input-wrapper"><span class="icon">🏠</span><input type="text" id="reg-rua" placeholder="Nome da Rua / Avenida"></div>
         </div>
         <div class="grid-2">
@@ -487,7 +545,7 @@
             <div class="top-bar-custom" style="justify-content: space-between; margin-bottom: 25px;">
                 <img data-logo="head" class="logo-img" alt="Helpet">
                 <div style="display: flex; align-items: center;">
-                    <div class="notification-icon" onclick="abrirListaChats()" role="button" aria-label="Abrir conversas">
+                    <div class="notification-icon" onclick="abrirNotificacoes()" role="button" aria-label="Abrir notificações">
                         <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
                         <div class="notification-badge hidden" id="notif-badge"></div>
                     </div>
@@ -497,7 +555,7 @@
 
             <div class="search-box">
                 <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" placeholder="Buscar campanhas ou animais">
+                <input type="text" id="busca-global" placeholder="Buscar campanhas, animais ou pessoas" autocomplete="off">
             </div>
 
             <div class="tabs" style="margin-top: 10px;">
@@ -505,12 +563,13 @@
                 <div class="tab" id="tab-btn-campanhas" onclick="mudarAbaHome('campanhas')">CAMPANHAS DE ARRECADAÇÃO</div>
             </div>
 
+            <div id="busca-pessoas" class="hidden"></div>
             <div id="conteudo-pets">
                 <div class="welcome-card">
                     <div class="welcome-icon">🐾</div>
                     <div>
                         <h3 id="ola-usuario">Olá!</h3>
-                        <p id="resumo-mes">Bem-vindo(a) ao Helpet! 🐾</p>
+                        <p id="resumo-mes">Bem-vindo(a) ao Helpet!</p>
                     </div>
                 </div>
                 <div id="lista-pets"><p class="text-center" style="color:var(--text-muted);">Carregando pets...</p></div>
@@ -521,11 +580,23 @@
             </div>
         </div>
 
+        <!-- Tela: Notificações -->
+        <div id="app-notificacoes" class="screen screen-with-nav logged-screen hidden">
+            <div class="top-bar-grid">
+                <button class="back-btn" onclick="navegarApp('app-home', document.querySelector('.nav-item'))" aria-label="Voltar">←</button>
+                <h2>Notificações</h2>
+                <span></span>
+            </div>
+            <div id="notif-lista"></div>
+            <button id="notif-marcar" class="btn-outline hidden" onclick="marcarTodasNotifs()" style="justify-content:center;">Marcar todas como lidas</button>
+            <button id="notif-limpar" class="btn-outline hidden" onclick="limparHistoricoNotifs()" style="justify-content:center; border-color:var(--error-red); color:var(--error-red);">Limpar histórico</button>
+        </div>
+
         <!-- Tela: Lista de conversas -->
         <div id="app-chats" class="screen screen-with-nav logged-screen hidden">
             <div class="top-bar-custom">
-                <h2 style="margin:0;">Conversas</h2>
                 <img data-logo="head" class="logo-img" alt="Helpet">
+                <h2 style="margin:0;">Conversas</h2>
             </div>
             <div id="chat-lista"></div>
         </div>
@@ -543,7 +614,12 @@
                 </div>
                 <div class="chat-msgs" id="chat-msgs"></div>
                 <div class="chat-input">
+                    <button id="chat-anexar" type="button" aria-label="Enviar foto"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></button>
+                    <input type="file" id="chat-arquivo" accept="image/*" style="display:none">
+                    <button id="chat-camera" type="button" aria-label="Tirar foto"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></button>
+                    <input type="file" id="chat-camera-arq" accept="image/*" capture="environment" style="display:none">
                     <input type="text" id="chat-input" placeholder="Digite uma mensagem" maxlength="1000" autocomplete="off">
+                    <button id="chat-mic" type="button" aria-label="Gravar áudio"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/></svg></button>
                     <button id="chat-enviar" aria-label="Enviar mensagem">
                         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                     </button>
@@ -570,18 +646,21 @@
 
             <div class="progress-header" style="margin-top: 10px;">
                 <strong style="color: var(--text-color);">Fotos do Pet</strong>
-                <span style="color: var(--text-muted); font-weight: normal;">Mínimo 1 foto</span>
+                <span style="color: var(--text-muted); font-weight: normal;">Até 3 fotos (<b id="contador-adocao">0/3</b>)</span>
             </div>
             <div class="upload-area" onclick="document.getElementById('file-adocao').click()">
-                <input type="file" id="file-adocao" accept="image/*" style="display:none" onchange="tratarUpload(event, 'preview-adocao', 'placeholder-adocao')">
+                <input type="file" id="file-adocao" multiple accept="image/*" style="display:none" onchange="tratarUpload(event, 'preview-adocao', 'placeholder-adocao')">
                 <img id="preview-adocao" class="upload-preview" alt="Prévia">
                 <div id="placeholder-adocao">
                     <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                    <div style="font-weight: bold;">Adicionar Capa da Adoção</div>
+                    <div style="font-weight: bold;">Adicionar fotos do pet (a 1ª é a capa)</div>
                     <div style="font-size: 0.8rem; margin-top: 5px;">PNG, JPG até 10MB (Clique para anexar)</div>
                 </div>
             </div>
 
+            <div class="thumbs" id="thumbs-adocao"></div>
+            <button type="button" class="btn-outline" onclick="document.getElementById('cam-adocao').click()" style="justify-content:center; margin-top:-8px; margin-bottom:16px;">Tirar foto com a câmera</button>
+            <input type="file" id="cam-adocao" accept="image/*" capture="environment" style="display:none" onchange="tratarUpload(event, 'preview-adocao', 'placeholder-adocao')">
             <div class="form-group">
                 <label>Nome do Pet</label>
                 <input type="text" id="input-pet-nome" class="form-control no-icon" placeholder="Ex: Max, Luna...">
@@ -620,7 +699,7 @@
                 <input type="text" id="input-pet-local" class="form-control no-icon" placeholder="📍 Sua cidade, Bairro...">
             </div>
 
-            <button id="btn-publicar-adocao" class="btn-primary" onclick="publicarAdocao()" style="margin-top: auto;">✨ Publicar Adoção</button>
+            <button id="btn-publicar-adocao" class="btn-primary" onclick="publicarAdocao()" style="margin-top: auto;">Publicar Adoção</button>
             <p class="text-center" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px;">Ao publicar, você concorda com nossos <a class="link-notion" onclick="abrirTermos('adocao')">termos de adoção responsável</a>.</p>
         </div>
 
@@ -634,18 +713,21 @@
 
             <div class="progress-header" style="margin-top: 10px;">
                 <strong style="color: var(--text-color);">Imagens da campanha</strong>
-                <span style="color: var(--text-muted); font-weight: normal;">Mínimo 1 foto</span>
+                <span style="color: var(--text-muted); font-weight: normal;">Até 3 fotos (<b id="contador-campanha">0/3</b>)</span>
             </div>
             <div class="upload-area" onclick="document.getElementById('file-campanha').click()">
-                <input type="file" id="file-campanha" accept="image/*" style="display:none" onchange="tratarUpload(event, 'preview-campanha', 'placeholder-campanha')">
+                <input type="file" id="file-campanha" multiple accept="image/*" style="display:none" onchange="tratarUpload(event, 'preview-campanha', 'placeholder-campanha')">
                 <img id="preview-campanha" class="upload-preview" alt="Prévia">
                 <div id="placeholder-campanha">
                     <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                    <div style="font-weight: bold;">Adicionar Capa da Campanha</div>
+                    <div style="font-weight: bold;">Adicionar fotos (a 1ª é a capa)</div>
                     <div style="font-size: 0.8rem; margin-top: 5px;">PNG, JPG até 10MB (Clique para anexar)</div>
                 </div>
             </div>
 
+            <div class="thumbs" id="thumbs-campanha"></div>
+            <button type="button" class="btn-outline" onclick="document.getElementById('cam-campanha').click()" style="justify-content:center; margin-top:-8px; margin-bottom:16px;">Tirar foto com a câmera</button>
+            <input type="file" id="cam-campanha" accept="image/*" capture="environment" style="display:none" onchange="tratarUpload(event, 'preview-campanha', 'placeholder-campanha')">
             <div class="form-group">
                 <label>Título da Campanha</label>
                 <input type="text" id="input-camp-titulo" class="form-control no-icon" placeholder="Ex: Mutirão de Ração - Abrigo Esperança">
@@ -686,7 +768,7 @@
                 </div>
             </div>
 
-            <button id="btn-criar-campanha" class="btn-primary" onclick="publicarCampanha()" style="margin-top: 25px; background-color: var(--primary-green);">⊕ Criar Campanha agora</button>
+            <button id="btn-criar-campanha" class="btn-primary" onclick="publicarCampanha()" style="margin-top: 25px; background-color: var(--primary-green);">Criar Campanha agora</button>
         </div>
 
         <!-- Tela: Detalhe do Pet -->
@@ -697,9 +779,10 @@
                 <img data-logo="head" class="logo-img logo-right" alt="Helpet">
             </div>
             <div class="hero">
-                <img id="pet-img" src="" alt="Foto do pet">
+                <img id="pet-img" src="" alt="Foto do pet" onclick="abrirImagem(this.src)">
                 <span class="badge-ativa">Disponível</span>
             </div>
+            <div id="pet-galeria" class="galeria"></div>
             <h3 class="section-title" style="margin-top:4px;">Sobre o pet</h3>
             <div class="info-box" id="pet-info"></div>
             <div class="grid-2">
@@ -760,8 +843,10 @@
 
         <!-- Tela: Configurações / Acessibilidade -->
         <div id="app-settings" class="screen screen-with-nav logged-screen hidden">
-            <div class="top-bar-custom">
+            <div class="top-bar-grid">
+                <button class="back-btn" onclick="abrirPerfil()" aria-label="Voltar">←</button>
                 <h2>Configurações</h2>
+                <span></span>
             </div>
 
             <div style="background:var(--light-green-bg); border-radius:16px; padding:16px; margin-bottom:20px; display:flex; gap:15px; align-items:flex-start;">
@@ -824,7 +909,7 @@
             </div>
 
             <div style="display:flex; gap:10px; margin-bottom:10px;">
-                <button class="btn-outline" onclick="restaurarPadroesAcessibilidade()" style="flex:1; justify-content:center; border-color:var(--primary-green); color:var(--primary-green); margin-top:0;">🔄 Restaurar Padrão</button>
+                <button class="btn-outline" onclick="restaurarPadroesAcessibilidade()" style="flex:1; justify-content:center; border-color:var(--primary-green); color:var(--primary-green); margin-top:0;">Restaurar Padrão</button>
             </div>
             <p class="text-center" style="font-size:0.8rem; margin:10px 0;">
                 <a class="link-notion" onclick="abrirTermos('uso')">Termos de Uso</a> ·
@@ -841,13 +926,21 @@
                 <img data-logo="head" class="logo-img" alt="Helpet">
                 <img src="https://placehold.co/100x100/EEE/999?text=M" alt="Avatar" class="user-avatar">
             </div>
+            <div class="mapa-busca">
+                <div class="search-box" style="margin-bottom:0;">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="mapa-busca-input" placeholder="Buscar rua ou endereço" autocomplete="off">
+                </div>
+                <div id="mapa-resultados" class="mapa-resultados hidden"></div>
+            </div>
             <div class="mapa-wrap">
                 <div id="mapa"></div>
                 <div class="mapa-legenda">
-                    <small>LEGENDA</small>
-                    <div><span class="lg-dot" style="background:#20B2AA"></span> Cheio</div>
-                    <div><span class="lg-dot" style="background:#FF8C00"></span> Razoável</div>
-                    <div><span class="lg-dot" style="background:#E53935"></span> Vazio</div>
+                    <small>FILTRAR</small>
+                    <div class="lg-item" onclick="alternarFiltroMapa('cheio', this)"><span class="lg-dot" style="background:#20B2AA"></span> Cheio</div>
+                    <div class="lg-item" onclick="alternarFiltroMapa('razoavel', this)"><span class="lg-dot" style="background:#FF8C00"></span> Razoável</div>
+                    <div class="lg-item" onclick="alternarFiltroMapa('vazio', this)"><span class="lg-dot" style="background:#E53935"></span> Vazio</div>
+                    <div class="lg-item" onclick="alternarFiltroMapa('pets', this)"><span class="lg-dot" style="background:#7E57C2"></span> Pet p/ adoção</div>
                 </div>
                 <button class="mapa-btn" onclick="localizarMe()" aria-label="Minha localização">➤</button>
                 <div id="mapa-aviso" class="mapa-aviso hidden">Modo ADM: toque no mapa para adicionar um bebedouro ou em um pin para editar.</div>
@@ -859,12 +952,16 @@
             <div class="top-bar-grid">
                 <button class="back-btn" onclick="voltarDoPerfil()" aria-label="Voltar">←</button>
                 <h2 id="pf-titulo-tela">Meu perfil</h2>
-                <img data-logo="head" class="logo-img logo-right" alt="Helpet">
+                <button id="pf-btn-config" class="gear-btn" onclick="navegarApp('app-settings', null)" aria-label="Configurações"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button>
             </div>
 
+            <div class="pf-banner" id="pf-banner">
+                <button id="pf-btn-banner" class="pf-banner-btn" type="button">Alterar banner</button>
+                <input type="file" id="pf-arquivo-banner" accept="image/*" style="display:none">
+            </div>
             <div class="pf-topo">
                 <div class="pf-foto">
-                    <img id="pf-foto" class="pf-foto-img" alt="Foto de perfil" src="">
+                    <img id="pf-foto" class="pf-foto-img" alt="Foto de perfil" src="" onclick="abrirImagem(this.src)">
                     <button id="pf-btn-foto" class="pf-foto-btn" aria-label="Alterar foto de perfil">+</button>
                     <input type="file" id="pf-arquivo-foto" accept="image/*" style="display:none">
                 </div>
@@ -922,13 +1019,29 @@
                 <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 Mapa
             </button>
-            <button class="nav-item" onclick="navegarApp('app-settings', this)">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                Ajustes
+            <button class="nav-item" id="nav-perfil" onclick="abrirPerfil()">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Perfil
             </button>
         </nav>
     </div>
 
+</div>
+
+<!-- Seletor de ícone -->
+<div id="modal-icone" class="modal-overlay hidden" onclick="if(event.target===this)fecharSeletorIcone()">
+    <div class="modal-box"><div class="modal-head"><h3>Escolha um ícone</h3><button class="modal-close" onclick="fecharSeletorIcone()" aria-label="Fechar">✕</button></div>
+    <div class="modal-body" id="icone-grade" style="display:grid; grid-template-columns:repeat(5,1fr); gap:8px; text-align:center;"></div></div>
+</div>
+
+<!-- Visualizador de imagem -->
+<div id="modal-img" class="modal-overlay hidden" style="background:rgba(0,0,0,.93); flex-direction:column;" onclick="if(event.target===this)fecharImagem()">
+    <div style="overflow:auto; width:100%; max-height:78vh;"><img id="modal-img-el" alt="Imagem" style="width:100%; display:block; border-radius:8px;"></div>
+    <div style="display:flex; gap:10px; margin-top:14px; width:100%; max-width:400px;">
+        <a id="modal-img-salvar" class="btn-primary" href="#" onclick="baixarImagem(document.getElementById('modal-img-el').src); return false;" style="flex:1; text-align:center; text-decoration:none; padding:14px; border-radius:25px; font-weight:bold;">Salvar</a>
+        <button class="btn-outline" onclick="fecharImagem()" style="flex:1; justify-content:center; margin:0; color:#fff; border-color:#fff;">Fechar</button>
+    </div>
+    <p style="color:#bbb; font-size:.75rem; margin:10px 0 0;">Toque na imagem para ampliar</p>
 </div>
 
 <!-- Janela de Termos -->
@@ -1049,7 +1162,25 @@
         document.getElementById(idTela).classList.remove('hidden');
     }
 
+    window.pilhaTelas = [];
+    function telaVisivel() { const e = [...document.querySelectorAll('.logged-screen')].find(x => !x.classList.contains('hidden')); return e ? e.id : null; }
     function navegarApp(idTela, btnRef) {
+        const atual = telaVisivel();
+        navegarAppBase(idTela, btnRef);
+        if (idTela === 'app-notificacoes') document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+        if (idTela === 'app-perfil' || idTela === 'app-settings') {
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            const np = document.getElementById('nav-perfil'); if (np) np.classList.add('active');
+        }
+        if (window.__restaurando || !atual || atual === idTela) return;
+        const pl = window.pilhaTelas, topo = pl[pl.length - 1], idx = pl.lastIndexOf(idTela);
+        if (idTela === topo || (idTela === 'app-home' && idx >= 0)) {
+            const n = pl.length - idx; pl.length = idx;
+            window.__ignorarPop = true; setTimeout(() => { window.__ignorarPop = false; }, 400);
+            history.go(-n);
+        } else { pl.push(atual); history.pushState({ h: 1 }, ''); }
+    }
+    function navegarAppBase(idTela, btnRef) {
         document.querySelectorAll('.logged-screen').forEach(el => el.classList.add('hidden'));
         document.getElementById(idTela).classList.remove('hidden');
         document.body.classList.toggle('in-chat', idTela === 'app-chat-room');
@@ -1097,21 +1228,31 @@
         spanValor.innerText = contagem;
     }
 
+    window.fotos = { adocao: [], campanha: [] };
+    const FOTO_PADRAO = { adocao: "https://placehold.co/600x400/A0D6B4/333?text=Novo+Pet", campanha: "https://placehold.co/600x400/FFDAB9/333?text=Nova+Campanha" };
+    function renderFotos(tipo) {
+        const arr = window.fotos[tipo], g = (id) => document.getElementById(id);
+        const prev = g('preview-' + tipo), ph = g('placeholder-' + tipo);
+        if (arr.length) { prev.src = arr[0]; prev.style.display = 'block'; ph.style.display = 'none'; }
+        else { prev.style.display = 'none'; ph.style.display = 'block'; }
+        g('thumbs-' + tipo).innerHTML = arr.map((src, i) => `<div class="thumb"><img src="${src}" alt=""><button type="button" onclick="removerFoto('${tipo}', ${i})" aria-label="Remover foto">✕</button>${i === 0 ? '<span>capa</span>' : ''}</div>`).join('');
+        g('contador-' + tipo).textContent = arr.length + '/3';
+        window[tipo === 'adocao' ? 'imagemAdocaoTemp' : 'imagemCampanhaTemp'] = arr[0] || FOTO_PADRAO[tipo];
+    }
+    window.removerFoto = function (tipo, i) { window.fotos[tipo].splice(i, 1); renderFotos(tipo); };
+    window.limparFotos = function (tipo) { window.fotos[tipo] = []; renderFotos(tipo); };
     function tratarUpload(event, previewId, placeholderId) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const preview = document.getElementById(previewId);
-                const placeholder = document.getElementById(placeholderId);
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-                placeholder.style.display = 'none';
-                if (previewId === 'preview-adocao') window.imagemAdocaoTemp = e.target.result;
-                if (previewId === 'preview-campanha') window.imagemCampanhaTemp = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
+        const tipo = previewId === 'preview-adocao' ? 'adocao' : 'campanha';
+        const files = [...event.target.files];
+        event.target.value = '';
+        const vagas = 3 - window.fotos[tipo].length;
+        if (vagas <= 0) { alert('Você já adicionou 3 fotos. Remova uma para trocar.'); return; }
+        if (files.length > vagas) alert('Máximo de 3 fotos: só as primeiras foram adicionadas.');
+        files.slice(0, vagas).forEach(file => {
+            const r = new FileReader();
+            r.onload = (e) => { if (window.fotos[tipo].length < 3) { window.fotos[tipo].push(e.target.result); renderFotos(tipo); } };
+            r.readAsDataURL(file);
+        });
     }
 
     function adicionarItemCampanha() {
@@ -1129,7 +1270,8 @@
                 <span>1</span>
                 <button onclick="mudarQuantidade(this, 1)">+</button>
             </div>`;
-        ultima.insertAdjacentElement('afterend', row);
+        (ultima || [...document.querySelectorAll('#app-nova-campanha .progress-header')].find(h => h.textContent.includes('Itens Necessários'))).insertAdjacentElement('afterend', row);
+        prepararLinhaItem(row);
     }
 
     function mudarFonte(tamanho, btn) {
@@ -1329,6 +1471,8 @@
                 if (!data.erro) {
                     document.getElementById('reg-rua').value = data.logradouro;
                     document.getElementById('reg-bairro').value = data.bairro;
+                    document.getElementById('reg-cidade').value = data.localidade || '';
+                    document.getElementById('reg-uf').value = data.uf || '';
                     document.getElementById('reg-numero').focus();
                     atualizarProgressoCadastro();
                 }
@@ -1381,7 +1525,122 @@
         if (e.target.closest('#screen-register-1, #screen-register-2')) atualizarProgressoCadastro();
     });
     atualizarProgressoCadastro();
-</script>
+
+    // ---------- Visualizador de imagem (zoom + salvar) ----------
+    window.abrirImagem = function (src) {
+        if (!src) return;
+        const el = document.getElementById('modal-img-el');
+        el.src = src; el.style.width = '100%';
+        document.getElementById('modal-img-salvar').href = src;
+        document.getElementById('modal-img').classList.remove('hidden');
+    };
+    window.fecharImagem = function () { document.getElementById('modal-img').classList.add('hidden'); };
+    document.getElementById('modal-img-el').addEventListener('click', function () { this.style.width = this.style.width === '100%' ? '250%' : '100%'; });
+    window.baixarImagem = async function (src) {
+        if (!src) return;
+        try {
+            const blob = await (await fetch(src)).blob();
+            const f = new File([blob], 'helpet-' + Date.now() + '.jpg', { type: blob.type || 'image/jpeg' });
+            if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f] }); return; }
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = f.name;
+            document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 8000);
+        } catch (err) {
+            if (err && err.name === 'AbortError') return;
+            window.abrirImagem(src);
+            alert('Não foi possível baixar automaticamente. Mantenha o dedo pressionado sobre a imagem e escolha Salvar.');
+        }
+    };
+
+    // ---------- Altura real da tela (teclado) para o chat ----------
+    function ajustarVh() {
+        const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+        document.documentElement.style.setProperty('--vh', h + 'px');
+    }
+    if (window.visualViewport) { visualViewport.addEventListener('resize', ajustarVh); }
+    window.addEventListener('resize', ajustarVh); ajustarVh();
+
+    // ---------- Deslizar entre Pets e Campanhas ----------
+    (function () {
+        const el = document.getElementById('app-home'); let x0 = 0, y0 = 0;
+        el.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+        el.addEventListener('touchend', (e) => {
+            const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+            if (Math.abs(dx) > 70 && Math.abs(dy) < 60 && Math.abs(dx) > Math.abs(dy) * 2) mudarAbaHome(dx < 0 ? 'campanhas' : 'pets');
+        }, { passive: true });
+    })();
+
+    // ---------- Acessibilidade salva + segue o sistema ----------
+    (function () {
+        const K = 'helpet_acess', $ = (id) => document.getElementById(id);
+        const ler = () => { try { return JSON.parse(localStorage.getItem(K) || 'null') || {}; } catch (e) { return {}; } };
+        const sys = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+        const setEscuro = (v) => { document.body.classList.toggle('dark-mode', v); $('toggle-dark').checked = v; };
+        function salvar() {
+            try { localStorage.setItem(K, JSON.stringify({ fonte: +$('slider-fonte').value, contraste: document.body.classList.contains('high-contrast'), azul: document.body.classList.contains('blue-light'), escuro: document.body.classList.contains('dark-mode'), manual: !!window.__escuroManual })); } catch (e) {}
+        }
+        const c = ler();
+        window.__escuroManual = !!c.manual;
+        if (c.fonte) { $('slider-fonte').value = c.fonte; mudarFonteSlider(c.fonte); }
+        if (c.contraste) { $('toggle-contrast').checked = true; document.body.classList.add('high-contrast'); }
+        else if (c.manual) setEscuro(!!c.escuro);
+        else if (sys && sys.matches) setEscuro(true);
+        if (c.azul) { $('toggle-bluelight').checked = true; document.body.classList.add('blue-light'); }
+        if (sys && sys.addEventListener) sys.addEventListener('change', (e) => { if (!window.__escuroManual && !document.body.classList.contains('high-contrast')) setEscuro(e.matches); });
+        const od = toggleDarkMode, oc = toggleHighContrast, ob = toggleBlueLight, of = mudarFonteSlider, orr = restaurarPadroesAcessibilidade;
+        window.toggleDarkMode = (cb) => { window.__escuroManual = true; od(cb); salvar(); };
+        window.toggleHighContrast = (cb) => { oc(cb); salvar(); };
+        window.toggleBlueLight = (cb) => { ob(cb); salvar(); };
+        window.mudarFonteSlider = (v) => { of(v); salvar(); };
+        window.restaurarPadroesAcessibilidade = () => {
+            orr(); window.__escuroManual = false;
+            if (sys && sys.matches) setEscuro(true);
+            try { localStorage.removeItem(K); } catch (e) {}
+        };
+    })();
+    
+    // ---------- Ícone e remoção dos itens da campanha ----------
+    const ICONES = ['🥣','🧴','📦','🦴','🍖','🐕','🐈','🧼','🧽','💊','🧻','🛏️','🧸','💧','🩹','🧹','🪣','🐾','🥫','🧺'];
+    window.mostrarSeletorIcone = function () {
+        document.getElementById('icone-grade').innerHTML = ICONES.map(i => `<button type="button" class="icone-op" onclick="escolherIcone('${i}')">${i}</button>`).join('');
+        document.getElementById('modal-icone').classList.remove('hidden');
+    };
+    window.abrirSeletorIcone = function (btn) { window.__iconeAlvo = btn; window.mostrarSeletorIcone(); };
+    window.escolherIcone = function (i) { if (window.__iconeAlvo) window.__iconeAlvo.textContent = i; window.fecharSeletorIcone(); };
+    window.fecharSeletorIcone = function () { document.getElementById('modal-icone').classList.add('hidden'); };
+    function prepararLinhaItem(row) {
+        const ico = row.querySelector('span span');
+        if (ico && !row.querySelector('.item-ico')) {
+            const b = document.createElement('button');
+            b.type = 'button'; b.className = 'item-ico'; b.textContent = ico.textContent.trim() || '📦';
+            b.setAttribute('aria-label', 'Alterar ícone'); b.onclick = () => window.abrirSeletorIcone(b);
+            ico.replaceWith(b);
+        }
+        if (!row.querySelector('.item-del')) {
+            const d = document.createElement('button');
+            d.type = 'button'; d.className = 'item-del'; d.textContent = '✕'; d.setAttribute('aria-label', 'Remover item');
+            d.onclick = () => row.remove();
+            row.appendChild(d);
+        }
+    }
+    document.querySelectorAll('#app-nova-campanha .item-list-row').forEach(prepararLinhaItem);
+
+    // ---------- Digitação: campo sempre visível e legível ----------
+    document.addEventListener('focusin', (e) => {
+        if (!e.target.matches || !e.target.matches('input:not([type=file]):not([type=checkbox]):not([type=range]), textarea, select')) return;
+        if (e.target.id === 'chat-input') return;
+        document.body.classList.add('teclado');
+        setTimeout(() => { try { e.target.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (err) {} }, 350);
+    });
+    document.addEventListener('focusout', () => setTimeout(() => {
+        const a = document.activeElement;
+        if (!a || !a.matches || !a.matches('input, textarea, select')) document.body.classList.remove('teclado');
+    }, 150));
+    document.addEventListener('input', (e) => {
+        if (e.target.tagName === 'TEXTAREA') { e.target.style.height = 'auto'; e.target.style.height = Math.max(110, e.target.scrollHeight) + 'px'; }
+    });
+    </script>
 
 <!-- Integração Firebase -->
 <script type="module">
@@ -1419,6 +1678,8 @@
     // ---------- Utilitários ----------
     const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const $ = (id) => document.getElementById(id);
+
+    async function fotosParaSalvar(tipo) { return Promise.all((window.fotos[tipo] || []).map(f => comprimirImagem(f, 700, 0.6))); }
 
     function comprimirImagem(dataUrl, maxW = 800, qualidade = 0.7) {
         return new Promise((resolve) => {
@@ -1477,16 +1738,16 @@
     // ============================================================
     function renderizarPet(id, p) {
         const criado = p.criadoEm?.toDate ? p.criadoEm.toDate() : new Date();
+        const porte = { P: 'Pequeno', M: 'Médio', G: 'Grande' }[p.porte] || p.porte || '';
+        const chips = [p.sexo, porte, p.idade].filter(Boolean).map(c => `<span class="pet-chip">${escapeHtml(c)}</span>`).join('');
         return `
-        <div class="item-card clickable" onclick="abrirPet('${id}')">
-            <img src="${escapeHtml(p.imagem)}" alt="${escapeHtml(p.nome)}">
-            <div class="item-card-body">
+        <div class="pet-card clickable" onclick="abrirPet('${id}')">
+            <div class="pet-card-img"><img src="${escapeHtml(p.imagem)}" alt="${escapeHtml(p.nome)}" loading="lazy"><span class="pet-card-time">${tempoAtras(criado)}</span></div>
+            <div class="pet-card-body">
                 <h3>${escapeHtml(p.nome)}</h3>
-                <div class="item-card-info">
-                    <span>📍 ${escapeHtml(p.local)}</span>
-                    <span>🕒 ${tempoAtras(criado)}</span>
-                </div>
-                <button class="btn-primary" style="margin-top:0; padding:12px;">Quero adotar</button>
+                <div class="pet-chips">${chips}</div>
+                <div class="pet-card-loc">📍 ${escapeHtml(p.local || '')}</div>
+                <button class="btn-primary pet-card-btn">Quero adotar</button>
             </div>
         </div>`;
     }
@@ -1494,7 +1755,7 @@
     // Lista de pets em TEMPO REAL
     let unsubPets = null, petsProntos = false;
 
-    function renderPetsHome() {
+    function renderPetsHomeOld() {
         if (!petsProntos) return;
         $('lista-pets').innerHTML = pets.size === 0
             ? '<p class="text-center" style="color:var(--text-muted);">Nenhum pet para adoção ainda. Toque no + para publicar o primeiro!</p>'
@@ -1511,6 +1772,7 @@
                 snap.docs.forEach(d => pets.set(d.id, d.data()));
                 petsProntos = true;
                 renderPetsHome();
+                desenharPets();
                 sincronizarTelasAbertas();
             },
             (e) => {
@@ -1543,13 +1805,14 @@
                 sexo, porte,
                 descricao: $('input-pet-desc').value.trim(),
                 local: $('input-pet-local').value.trim() || 'Localização não informada',
-                imagem,
+                imagem, imagens: await fotosParaSalvar('adocao'),
                 donoNome: meuNome(),
                 criadoPor: user.uid,
                 criadoEm: serverTimestamp()
             });
 
             alert("Adoção publicada com sucesso!");
+            window.limparFotos('adocao');
             mudarAbaHome('pets');
             navegarApp('app-home', document.querySelector('.nav-item'));
         } catch (e) {
@@ -1574,11 +1837,13 @@
         $('pet-titulo').textContent = p.nome;
         $('pet-adm-excluir').classList.toggle('hidden', !ehAdmin());
         $('pet-img').src = p.imagem;
+        $('pet-galeria').innerHTML = (p.imagens && p.imagens.length > 1) ? p.imagens.map(src => `<img src="${escapeHtml(src)}" alt="" onclick="document.getElementById('pet-img').src=this.src">`).join('') : '';
         $('pet-local').textContent = p.local || '-';
         $('pet-idade').textContent = p.idade || 'Não informada';
         const dono = p.donoNome || 'Protetor(a)';
         $('pet-dono-nome').textContent = dono;
         $('pet-dono-inicial').textContent = dono.charAt(0).toUpperCase();
+        $('pet-dono-inicial').dataset.fotoUid = p.criadoPor || ''; delete $('pet-dono-inicial').dataset.fotoOk;
         $('pet-info').innerHTML = `
             <strong>Nome:</strong> ${escapeHtml(p.nome)}<br>
             <strong>Idade:</strong> ${escapeHtml(p.idade || 'Não informada')}<br>
@@ -1630,6 +1895,8 @@
     let listaChats = [];
     let unsubChats = null;
     let unsubMsgs = null;
+    let notifs = [], unsubNotifs = null, notifsPrimeira = true;
+    const notifsApagando = new Set();
     let conversaAtual = null;   // { id, outroUid, outroNome }
 
     const chatIdDe = (a, b) => [a, b].sort().join('_');
@@ -1650,13 +1917,133 @@
     }
 
     function atualizarBadgeChat() {
-        const uid = auth.currentUser?.uid;
-        const n = listaChats.filter(c => naoLida(c, uid)).length;
+        const nMsg = notifs.filter(n => n.tipo === 'mensagem' && !n.lida).length;
+        const chatsNaoLidos = new Set(notifs.filter(n => n.tipo === 'mensagem' && !n.lida).map(n => n.chatId));
+        const nTotal = chatsNaoLidos.size + notifs.filter(n => n.tipo !== 'mensagem' && !n.lida).length;
+        const fmt = (n) => n > 99 ? '99+' : String(n);
         const b = $('nav-chat-badge');
-        b.textContent = n > 9 ? '9+' : n;
-        b.classList.toggle('hidden', n === 0);
-        $('notif-badge').classList.toggle('hidden', n === 0);   // bolinha do sino
+        b.textContent = fmt(nMsg);
+        b.classList.toggle('hidden', nMsg === 0);
+        const nb = $('notif-badge');
+        nb.textContent = fmt(nTotal);
+        nb.classList.toggle('hidden', nTotal === 0);
     }
+
+    // ---------- NOTIFICAÇÕES (mensagens recebidas e ajuda em campanhas) ----------
+    function iniciarListenerNotifs(user) {
+        if (unsubNotifs) unsubNotifs();
+        notifsPrimeira = true;
+        if ('Notification' in window && Notification.permission === 'default') document.addEventListener('click', () => Notification.requestPermission(), { once: true });
+        unsubNotifs = onSnapshot(
+            query(collection(db, "notificacoes"), where("para", "==", user.uid)),
+            (snap) => {
+                notifs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                if (notifsPrimeira) notifsPrimeira = false;
+                else snap.docChanges().forEach(ch => { if (ch.type === 'added' && !ch.doc.data().lida) avisarNotificacao(ch.doc.data()); });
+                atualizarBadgeChat();
+                if (conversaAtual && !$('app-chat-room').classList.contains('hidden')) limparNotifsMsg(conversaAtual.id);
+                if (!$('app-notificacoes').classList.contains('hidden')) renderNotificacoes();
+            },
+            (e) => console.warn("Notificações indisponíveis (publique as regras novas do Firestore):", e)
+        );
+    }
+
+    // notificações de mensagem somem quando você abre a conversa
+    // abrir a conversa marca as mensagens como lidas (o histórico continua guardado)
+    async function limparNotifsMsg(chatId) {
+        const alvo = notifs.filter(n => n.tipo === 'mensagem' && n.chatId === chatId && !n.lida && !notifsApagando.has(n.id));
+        if (!alvo.length) return;
+        alvo.forEach(n => notifsApagando.add(n.id));
+        try {
+            const bt = writeBatch(db);
+            alvo.forEach(n => bt.update(doc(db, "notificacoes", n.id), { lida: true }));
+            await bt.commit();
+        } catch (e) { console.warn(e); alvo.forEach(n => notifsApagando.delete(n.id)); }
+    }
+
+    function avisarNotificacao(n) {
+        if (n.tipo === 'mensagem' && conversaAtual && n.chatId === conversaAtual.id && !$('app-chat-room').classList.contains('hidden')) return;
+        const titulo = n.tipo === 'mensagem' ? 'Nova mensagem de ' + (n.deNome || 'alguém') : 'Sua campanha recebeu ajuda';
+        try {
+            if ('Notification' in window && Notification.permission === 'granted' && document.hidden)
+                new Notification(titulo, { body: n.texto, icon: (typeof LOGO_ICON !== 'undefined' ? LOGO_ICON : undefined) });
+        } catch (e) {}
+        const t = document.createElement('div');
+        t.className = 'toast-notif';
+        t.innerHTML = `<strong>${escapeHtml(titulo)}</strong><br>${escapeHtml(n.texto || '')}`;
+        t.onclick = () => { t.remove(); window.abrirNotificacoes(); };
+        document.body.appendChild(t);
+        setTimeout(() => t.remove(), 5000);
+    }
+
+    function renderNotificacoes() {
+        const box = $('notif-lista');
+        const grupos = new Map(), itens = [];
+        notifs.forEach(n => {
+            if (n.tipo === 'mensagem') {
+                const g = grupos.get(n.chatId) || { tipo: 'mensagem', chatId: n.chatId, qtd: 0, t: 0, texto: '', deNome: n.deNome || 'alguém', de: n.de };
+                if (!n.lida) g.qtd++;
+                const t = tempoMs(n);
+                if (t >= g.t) { g.t = t; g.texto = n.texto; g.de = n.de; g.deNome = n.deNome || g.deNome; }
+                grupos.set(n.chatId, g);
+            } else {
+                itens.push({ tipo: 'doacao', id: n.id, de: n.de, deNome: n.deNome, texto: n.texto, t: tempoMs(n), qtd: n.lida ? 0 : 1 });
+            }
+        });
+        itens.push(...grupos.values());
+        itens.sort((x, y) => y.t - x.t);
+        $('notif-marcar').classList.toggle('hidden', !notifs.some(n => !n.lida));
+        $('notif-limpar').classList.toggle('hidden', notifs.length === 0);
+        if (!itens.length) { box.innerHTML = '<p class="text-center" style="color:var(--text-muted); margin-top:40px;">Você não tem notificações.</p>'; return; }
+        box.innerHTML = itens.map(i => {
+            const msg = i.tipo === 'mensagem';
+            const titulo = msg ? 'Mensagens de ' + (i.deNome || 'alguém') : 'Sua campanha recebeu ajuda';
+            const sub = msg && i.qtd > 1 ? `${i.qtd} novas mensagens · ${i.texto || ''}` : (i.texto || '');
+            const clique = msg ? `abrirNotifChat('${escapeHtml(i.chatId)}')` : `abrirNotif('${escapeHtml(i.id)}')`;
+            return `<div class="chat-list-item clickable ${i.qtd ? 'unread' : ''}" onclick="${clique}">
+                <div class="chat-avatar" ${msg ? '' : 'style="background:var(--primary-orange);"'} data-foto-uid="${escapeHtml(i.de || '')}">${escapeHtml((i.deNome || '?').charAt(0).toUpperCase())}</div>
+                <div class="chat-list-main"><div class="chat-list-top"><span class="chat-list-name">${escapeHtml(titulo)}</span><span class="chat-list-time">${tempoAtras(new Date(i.t))}</span></div>
+                <div class="chat-list-last" style="white-space:normal;">${escapeHtml(sub)}</div></div>${i.qtd ? '<span class="unread-dot"></span>' : ''}</div>`;
+        }).join('');
+    }
+
+    window.abrirNotifChat = function (chatId) {
+        const doChat = notifs.filter(n => n.tipo === 'mensagem' && n.chatId === chatId).sort((x, y) => tempoMs(y) - tempoMs(x));
+        if (!doChat.length) return;
+        limparNotifsMsg(chatId);
+        abrirConversaCom(doChat[0].de, doChat[0].deNome || 'Usuário', null);
+    };
+
+    window.abrirNotificacoes = function () { renderNotificacoes(); navegarApp('app-notificacoes', null); };
+
+    window.abrirNotif = async function (id) {
+        const n = notifs.find(x => x.id === id);
+        if (!n) return;
+        if (!n.lida) { try { await updateDoc(doc(db, "notificacoes", id), { lida: true }); } catch (e) { console.warn(e); } }
+        if (n.tipo === 'mensagem') abrirConversaCom(n.de, n.deNome || 'Usuário', null);
+        else if (n.campanhaId) window.abrirCampanha(n.campanhaId);
+    };
+
+    window.marcarTodasNotifs = async function () {
+        const nao = notifs.filter(n => !n.lida);
+        if (!nao.length) return;
+        try {
+            const bt = writeBatch(db);
+            nao.slice(0, 400).forEach(n => bt.update(doc(db, "notificacoes", n.id), { lida: true }));
+            await bt.commit();
+        } catch (e) { console.error(e); alert("Não foi possível atualizar: " + e.message); }
+    };
+
+    window.limparHistoricoNotifs = async function () {
+        if (!notifs.length || !confirm("Apagar todo o histórico de notificações?")) return;
+        try {
+            for (let i = 0; i < notifs.length; i += 400) {
+                const bt = writeBatch(db);
+                notifs.slice(i, i + 400).forEach(n => bt.delete(doc(db, "notificacoes", n.id)));
+                await bt.commit();
+            }
+        } catch (e) { console.error(e); alert("Não foi possível limpar: " + e.message); }
+    };
 
     function iniciarListenerChats(user) {
         if (unsubChats) unsubChats();
@@ -1680,13 +2067,13 @@
             return;
         }
         box.innerHTML = listaChats.map(c => {
-            const { outroNome } = outroDe(c, uid);
+            const { outroUid, outroNome } = outroDe(c, uid);
             const nl = naoLida(c, uid);
             const prefixo = c.ultimoUid === uid ? 'Você: ' : '';
             const t = c.ultimaEm?.toDate ? dataCurta(c.ultimaEm.toDate()) : '';
             return `
             <div class="chat-list-item clickable ${nl ? 'unread' : ''}" onclick="abrirConversaPorId('${escapeHtml(c.id)}')">
-                <div class="chat-avatar">${escapeHtml(outroNome.charAt(0).toUpperCase())}</div>
+                <div class="chat-avatar" data-foto-uid="${escapeHtml(outroUid)}">${escapeHtml(outroNome.charAt(0).toUpperCase())}</div>
                 <div class="chat-list-main">
                     <div class="chat-list-top"><span class="chat-list-name">${escapeHtml(outroNome)}</span><span class="chat-list-time">${t}</span></div>
                     <div class="chat-list-last">${prefixo}${escapeHtml(c.ultimaMensagem)}</div>
@@ -1725,6 +2112,7 @@
         }
         conversaAtual = { id, outroUid, outroNome };
         $('chat-head-avatar').textContent = outroNome.charAt(0).toUpperCase();
+        $('chat-head-avatar').dataset.fotoUid = outroUid; delete $('chat-head-avatar').dataset.fotoOk;
         $('chat-head-nome').textContent = outroNome;
         $('chat-head-sub').textContent = petNome ? `Sobre: ${petNome}` : 'Conversa privada';
         $('chat-msgs').innerHTML = '<div class="chat-empty">Carregando…</div>';
@@ -1749,7 +2137,7 @@
                 box.innerHTML = snap.docs.map(d => {
                     const m = d.data();
                     const t = m.criadoEm?.toDate ? hora(m.criadoEm.toDate()) : '';
-                    return `<div class="bubble ${m.uid === uid ? 'me' : 'them'}">${escapeHtml(m.texto)}<small>${t}</small></div>`;
+                    return `<div class="bubble ${m.uid === uid ? 'me' : 'them'}">${m.imagem ? `<img class="chat-img" src="${escapeHtml(m.imagem)}" alt="Foto" onclick="abrirImagem(this.src)"><a href="#" class="chat-baixar" onclick="baixarImagem(this.previousElementSibling.src); return false;">Baixar imagem</a>` : ''}${m.audio ? `<audio controls src="${escapeHtml(m.audio)}" style="max-width:100%; display:block;"></audio>` : ''}${m.texto ? escapeHtml(m.texto) : ''}<small>${t}</small></div>`;
                 }).join('');
                 box.scrollTop = box.scrollHeight;
                 marcarComoLida();
@@ -1767,6 +2155,7 @@
 
     async function marcarComoLida() {
         if (!conversaAtual || !auth.currentUser) return;
+        limparNotifsMsg(conversaAtual.id);
         try {
             const batch = writeBatch(db);
             batch.update(doc(db, "chats", conversaAtual.id), { [`lidoEm.${auth.currentUser.uid}`]: serverTimestamp() });
@@ -1780,18 +2169,27 @@
         navegarApp('app-chats', $('nav-chat'));
     };
 
-    async function enviarMensagem() {
+    async function enviarMensagem(imagem, audio) {
         const user = auth.currentUser;
         const input = $('chat-input');
         const texto = input.value.trim();
-        if (!user || !conversaAtual || !texto) return;
+        if (!user || !conversaAtual || (!texto && !imagem && !audio)) return;
         input.value = '';
         try {
             const batch = writeBatch(db);
             const msgRef = doc(collection(db, "chats", conversaAtual.id, "mensagens"));
-            batch.set(msgRef, { uid: user.uid, texto, criadoEm: serverTimestamp() });
+            const dado = { uid: user.uid, texto, criadoEm: serverTimestamp() };
+            if (imagem) dado.imagem = imagem;
+            if (audio) dado.audio = audio;
+            batch.set(msgRef, dado);
+            batch.set(doc(collection(db, "notificacoes")), {
+                para: conversaAtual.outroUid, de: user.uid, deNome: meuNome(),
+                tipo: 'mensagem', chatId: conversaAtual.id,
+                texto: texto ? texto.slice(0, 100) : (audio ? 'Enviou um áudio' : 'Enviou uma foto'),
+                lida: false, criadoEm: serverTimestamp()
+            });
             batch.update(doc(db, "chats", conversaAtual.id), {
-                ultimaMensagem: texto.slice(0, 80),
+                ultimaMensagem: texto ? texto.slice(0, 80) : (audio ? 'Áudio' : '📷 Foto'),
                 ultimaEm: serverTimestamp(),
                 ultimoUid: user.uid,
                 [`lidoEm.${user.uid}`]: serverTimestamp()
@@ -1803,8 +2201,23 @@
             alert("Não foi possível enviar a mensagem: " + e.message);
         }
     }
-    $('chat-enviar').addEventListener('click', enviarMensagem);
+    ['mousedown', 'touchstart'].forEach(ev => $('chat-enviar').addEventListener(ev, (e) => e.preventDefault(), { passive: false }));
+    $('chat-enviar').addEventListener('click', () => { enviarMensagem(); $('chat-input').focus(); });
     $('chat-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); enviarMensagem(); } });
+    $('chat-anexar').addEventListener('click', () => $('chat-arquivo').click());
+    ['chat-arquivo', 'chat-camera-arq'].forEach(idIn => $(idIn).addEventListener('change', async (e) => {
+        const arq = e.target.files[0];
+        e.target.value = '';
+        if (!arq || !conversaAtual) return;
+        if (!arq.type.startsWith('image/')) { alert("Escolha uma imagem."); return; }
+        try {
+            const bruto = await new Promise((ok, er) => { const fr = new FileReader(); fr.onload = () => ok(fr.result); fr.onerror = er; fr.readAsDataURL(arq); });
+            const img = await comprimirImagem(bruto, 900, 0.65);
+            if (img.length > 600000) { alert("Imagem muito grande. Tente outra."); return; }
+            await enviarMensagem(img);
+        } catch (err) { console.error(err); alert("Não foi possível enviar a foto."); }
+    }));
+    $('chat-camera').addEventListener('click', () => $('chat-camera-arq').click());
 
     // ============================================================
     // CAMPANHAS
@@ -1828,7 +2241,7 @@
     // Lista de campanhas em TEMPO REAL
     let unsubCamps = null, campsProntas = false;
 
-    function renderCampanhasHome() {
+    function renderCampanhasHomeOld() {
         if (!campsProntas) return;
         $('conteudo-campanhas').innerHTML = campanhas.size === 0
             ? '<p class="text-center" style="color:var(--text-muted);">Nenhuma campanha ainda. Seja o primeiro a criar!</p>'
@@ -1865,6 +2278,7 @@
         const itens = [...document.querySelectorAll('#app-nova-campanha .item-list-row')].map(row => ({
             nome: row.querySelector('span').textContent.replace(/^[^\p{L}]+/u, '').trim(),
             meta: parseInt(row.querySelector('.counter span').textContent) || 0,
+            icone: (row.querySelector('.item-ico')?.textContent || '').trim(),
             arrecadado: 0
         })).filter(i => i.meta > 0);
 
@@ -1877,7 +2291,7 @@
             if (imagem.startsWith('data:')) imagem = await comprimirImagem(imagem);
 
             await addDoc(collection(db, "campanhas"), {
-                titulo, descricao, itens, imagem,
+                titulo, descricao, itens, imagem, imagens: await fotosParaSalvar('campanha'),
                 duracaoDias: 30,
                 arrecadado: 0,
                 percentual: 0,
@@ -1887,6 +2301,7 @@
             });
 
             alert("Campanha criada com sucesso!");
+            window.limparFotos('campanha');
             mudarAbaHome('campanhas');
             navegarApp('app-home', document.querySelector('.nav-item'));
         } catch (e) {
@@ -1925,7 +2340,7 @@
             const nomeAttr = escapeHtml(i.nome).replace(/'/g, '&#39;');
             return `
             <div class="need-row">
-                <div class="need-head"><span>${escapeHtml(i.nome)}</span><span>${arrec}/${meta}</span></div>
+                <div class="need-head"><span>${i.icone ? escapeHtml(i.icone) + ' ' : ''}${escapeHtml(i.nome)}</span><span>${arrec}/${meta}</span></div>
                 <div class="need-foot">
                     <div class="bar"><div style="width:${p}%;"></div></div>
                     ${completo || encerrada
@@ -1948,10 +2363,11 @@
 
         $('camp-detalhe-corpo').innerHTML = `
             <div class="hero">
-                <img src="${escapeHtml(c.imagem)}" alt="${escapeHtml(c.titulo)}">
+                <img id="camp-img" onclick="abrirImagem(this.src)" src="${escapeHtml(c.imagem)}" alt="${escapeHtml(c.titulo)}">
                 <span class="badge-ativa" ${encerrada ? 'style="background:#888;"' : ''}>${encerrada ? 'Encerrada' : 'Ativa'}</span>
                 <div class="hero-title">${escapeHtml(c.titulo)}</div>
             </div>
+            ${(c.imagens && c.imagens.length > 1) ? `<div class="galeria">${c.imagens.map(src => `<img src="${escapeHtml(src)}" alt="" onclick="document.getElementById('camp-img').src=this.src">`).join('')}</div>` : ''}
             ${c.criadoPor ? `
             <div class="owner-row clickable" onclick="abrirPerfilDaCampanha()">
                 <div class="owner-avatar" id="camp-dono-inicial">${escapeHtml(donoNome.charAt(0).toUpperCase())}</div>
@@ -2070,7 +2486,7 @@
                     const meta = metaDoItem(i);
                     const doado = pendente.itens.find(x => x.nome === i.nome);
                     const arrecadado = Math.min(meta, arrecDoItem(i) + (doado ? doado.qtd : 0));
-                    return { nome: i.nome, meta, arrecadado };
+                    return { nome: i.nome, icone: i.icone || '', meta, arrecadado };
                 });
                 const r = resumo(itens);
                 tx.update(ref, { itens, arrecadado: r.totalArrec, percentual: r.pct });
@@ -2087,6 +2503,17 @@
                     criadoEm: serverTimestamp()
                 });
             } catch (e) { console.warn("Histórico não salvo:", e); }
+
+            if (atualizada.criadoPor && atualizada.criadoPor !== user.uid) {
+                try {
+                    await addDoc(collection(db, "notificacoes"), {
+                        para: atualizada.criadoPor, de: user.uid, deNome: meuNome(), tipo: 'doacao',
+                        campanhaId: pendente.campId,
+                        texto: `${meuNome()} ajudou "${pendente.campTitulo}" com ${pendente.itens.map(i => i.qtd + 'x ' + i.nome).join(', ')}.`.slice(0, 200),
+                        lida: false, criadoEm: serverTimestamp()
+                    });
+                } catch (e) { console.warn("Notificação não enviada:", e); }
+            }
 
             mostrarSucesso(atualizada);
             try { localStorage.removeItem(CHAVE_PENDENTE); } catch (e) {}
@@ -2106,7 +2533,7 @@
             const p = meta > 0 ? Math.round((arrec / meta) * 100) : 0;
             return `
             <div class="need-row">
-                <div class="need-head"><span>${escapeHtml(i.nome)}</span><span>${arrec}/${meta} ${arrec >= meta ? '✓' : ''}</span></div>
+                <div class="need-head"><span>${i.icone ? escapeHtml(i.icone) + ' ' : ''}${escapeHtml(i.nome)}</span><span>${arrec}/${meta} ${arrec >= meta ? '✓' : ''}</span></div>
                 <div class="need-foot"><div class="bar"><div style="width:${p}%; background:var(--primary-green);"></div></div></div>
             </div>`;
         }).join('');
@@ -2173,7 +2600,7 @@
         if (!user) return;
         uid = uid || user.uid;
         const atual = [...document.querySelectorAll('.logged-screen')].find(el => !el.classList.contains('hidden'));
-        if (atual && atual.id !== 'app-perfil') perfilVoltarPara = atual.id;
+        if (atual && atual.id !== 'app-perfil' && atual.id !== 'app-settings') perfilVoltarPara = atual.id;
 
         const proprio = uid === user.uid;
         perfilAlvo = { uid, proprio, nome: proprio ? meuNome() : (nome || nomesPerfil.get(uid) || 'Usuário') };
@@ -2187,6 +2614,8 @@
 
         $('pf-titulo-tela').textContent = proprio ? 'Meu perfil' : 'Perfil';
         $('pf-btn-foto').classList.toggle('hidden', !proprio);
+        $('pf-btn-config').style.visibility = proprio ? 'visible' : 'hidden';
+        $('pf-btn-banner').classList.toggle('hidden', !proprio);
         $('pf-avaliar').classList.toggle('hidden', proprio);
         $('pf-sec-historico').classList.toggle('hidden', !proprio);
         $('pf-adm-box').classList.toggle('hidden', !(ehAdmin() && !proprio));
@@ -2256,6 +2685,7 @@
         if (!perfilAlvo) return;
         const nome = pfDados.nome || perfilAlvo.nome;
         $('pf-nome').textContent = nome;
+        $('pf-banner').style.backgroundImage = pfDados.banner ? `url("${pfDados.banner}")` : '';
         $('pf-foto').src = pfDados.foto || (perfilAlvo.proprio && fotoUsuario) || avatarPadrao(nome);
     }
 
@@ -2340,6 +2770,37 @@
             fr.readAsDataURL(arquivo);
         });
     }
+
+    // ---------- Banner do perfil ----------
+    function bannerCortado(arquivo, w, h) {
+        return new Promise((ok, erro) => {
+            const fr = new FileReader();
+            fr.onerror = () => erro(new Error("Não foi possível ler a imagem."));
+            fr.onload = () => {
+                const img = new Image();
+                img.onerror = () => erro(new Error("Imagem inválida."));
+                img.onload = () => {
+                    const c = document.createElement('canvas'); c.width = w; c.height = h;
+                    const r = Math.max(w / img.width, h / img.height), dw = img.width * r, dh = img.height * r;
+                    c.getContext('2d').drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
+                    ok(c.toDataURL('image/jpeg', 0.75));
+                };
+                img.src = fr.result;
+            };
+            fr.readAsDataURL(arquivo);
+        });
+    }
+    $('pf-btn-banner').addEventListener('click', () => $('pf-arquivo-banner').click());
+    $('pf-arquivo-banner').addEventListener('change', async (e) => {
+        const arq = e.target.files[0];
+        e.target.value = '';
+        if (!arq || !auth.currentUser) return;
+        try {
+            const dataUrl = await bannerCortado(arq, 900, 300);
+            await setDoc(doc(db, "perfis", auth.currentUser.uid), { banner: dataUrl, nome: meuNome() }, { merge: true });
+            alert("Banner atualizado!");
+        } catch (err) { console.error(err); alert("Não foi possível trocar o banner: " + err.message); }
+    });
 
     // ---------- Pets do perfil ----------
     function renderMeusPets() {
@@ -2446,7 +2907,7 @@
         $('mc-titulo-input').value = c.titulo || '';
         $('mc-desc').value = c.descricao || '';
         $('mc-dias').value = c.duracaoDias || 30;
-        itensEdicao = (c.itens || []).map(i => ({ nome: i.nome, meta: metaDoItem(i), arrecadado: arrecDoItem(i) }));
+        itensEdicao = (c.itens || []).map(i => ({ nome: i.nome, icone: i.icone || '', meta: metaDoItem(i), arrecadado: arrecDoItem(i) }));
         renderItensEdicao();
         $('modal-camp').classList.remove('hidden');
     };
@@ -2457,11 +2918,12 @@
         if (itensEdicao.length === 0) { box.innerHTML = '<p class="pf-vazio">Nenhum item. Adicione pelo menos um.</p>'; return; }
         box.innerHTML = itensEdicao.map((it, n) => `
             <div class="pf-item-edit">
-                <span>${escapeHtml(it.nome)}<small>${Math.min(it.arrecadado, it.meta)} já arrecadados</small></span>
+                <span><button type="button" class="item-ico" onclick="pfMudarIcone(${n})">${escapeHtml(it.icone || '📦')}</button> ${escapeHtml(it.nome)}<small>${Math.min(it.arrecadado, it.meta)} já arrecadados</small></span>
                 <input type="number" min="1" class="form-control no-icon" value="${it.meta}" aria-label="Meta de ${escapeHtml(it.nome)}" oninput="pfMudarMeta(${n}, this.value)">
                 <button type="button" aria-label="Remover ${escapeHtml(it.nome)}" onclick="pfRemoverItem(${n})">✕</button>
             </div>`).join('');
     }
+    window.pfMudarIcone = function (n) { window.__iconeAlvo = { set textContent(v) { if (itensEdicao[n]) { itensEdicao[n].icone = v; renderItensEdicao(); } } }; window.mostrarSeletorIcone(); };
     window.pfMudarMeta = function (n, v) { if (itensEdicao[n]) itensEdicao[n].meta = parseInt(v) || 0; };
     window.pfRemoverItem = function (n) {
         const it = itensEdicao[n];
@@ -2484,7 +2946,7 @@
         if (itensEdicao.length === 0) { alert("Adicione pelo menos um item."); return; }
         if (itensEdicao.some(i => !(i.meta >= 1))) { alert("Toda meta precisa ser 1 ou mais."); return; }
         const dias = Math.max(1, Math.min(365, parseInt($('mc-dias').value) || 30));
-        const itens = itensEdicao.map(i => ({ nome: i.nome, meta: i.meta, arrecadado: Math.min(i.arrecadado, i.meta) }));
+        const itens = itensEdicao.map(i => ({ nome: i.nome, icone: i.icone || '', meta: i.meta, arrecadado: Math.min(i.arrecadado, i.meta) }));
         const r = resumo(itens);
         const btn = $('mc-salvar');
         btn.disabled = true;
@@ -2549,7 +3011,7 @@
                     const t = d.criadoEm?.toDate ? d.criadoEm.toDate() : new Date();
                     return t.getMonth() === agora.getMonth() && t.getFullYear() === agora.getFullYear();
                 }).length;
-                if (el) el.textContent = n === 0 ? 'Que tal ajudar um animal hoje? 🐾'
+                if (el) el.textContent = n === 0 ? 'Que tal ajudar um animal hoje?'
                     : n === 1 ? 'Você já apoiou 1 campanha este mês 😊'
                     : `Você já apoiou ${n} campanhas este mês 😊`;
 
@@ -2559,13 +3021,14 @@
                     setDoc(doc(db, "perfis", user.uid), { ajudouCampanhas: distintas }, { merge: true }).catch(() => {});
                 }
             },
-            (e) => { console.warn("Resumo do mês indisponível:", e); if (el) el.textContent = 'Bem-vindo(a) ao Helpet! 🐾'; }
+            (e) => { console.warn("Resumo do mês indisponível:", e); if (el) el.textContent = 'Bem-vindo(a) ao Helpet!'; }
         );
     }
 
     function pararListeners() {
-        [unsubPets, unsubCamps, unsubResumo, unsubChats, unsubBB].forEach(u => { try { if (u) u(); } catch (e) {} });
-        unsubPets = unsubCamps = unsubResumo = unsubChats = unsubBB = null;
+        [unsubPets, unsubCamps, unsubResumo, unsubChats, unsubBB, unsubNotifs].forEach(u => { try { if (u) u(); } catch (e) {} });
+        unsubPets = unsubCamps = unsubResumo = unsubChats = unsubBB = unsubNotifs = null;
+        notifs = [];
         petsProntos = campsProntas = false;
         window.fecharListenerConversa();
         window.fecharListenersPerfil();
@@ -2600,6 +3063,9 @@
         atualizarSaudacao();
         iniciarListenerResumo(user);
         iniciarListenerChats(user);
+        iniciarListenerNotifs(user);
+        if (ehAdmin()) setDoc(doc(db, "perfis", user.uid), { oculto: true }, { merge: true }).catch(() => {});
+        prepararLocalPadrao();
         iniciarListenerBebedouros();
 
         // Recarregou a página? Volta para a tela em que você estava
@@ -2632,21 +3098,31 @@
     const STATUS_BB = { cheio: 'Cheio', razoavel: 'Razoável', vazio: 'Vazio' };
     const PAW = '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><ellipse cx="12" cy="16" rx="5" ry="4"/><circle cx="5.5" cy="10.5" r="2"/><circle cx="9.5" cy="6" r="2"/><circle cx="14.5" cy="6" r="2"/><circle cx="18.5" cy="10.5" r="2"/></svg>';
 
-    let mapa = null, camadaBB = null, unsubBB = null, meuPonto = null;
-    let jaLocalizou = false, pediuLocal = false;
+    let mapa = null, camadaBB = null, camadaPets = null, unsubBB = null, meuPonto = null;
+    let jaLocalizou = false, pediuLocal = false, ultimoPonto = null, centralizou = false;
     let bbEditando = null, bbLatLng = null;
     const bebedouros = new Map();
+
+    const filtroMapa = { cheio: true, razoavel: true, vazio: true, pets: true };
+    window.alternarFiltroMapa = function (chave, el) {
+        filtroMapa[chave] = !filtroMapa[chave];
+        if (el) el.classList.toggle('off', !filtroMapa[chave]);
+        desenharBB();
+    };
 
     function iniciarMapa() {
         if (mapa) return;
         if (typeof L === 'undefined') { alert("Não foi possível carregar o mapa. Verifique sua conexão."); return; }
-        mapa = L.map('mapa', { zoomControl: false }).setView([-23.55, -46.63], 13);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            maxZoom: 19, subdomains: 'abcd', attribution: '© OpenStreetMap · © CARTO'
+        mapa = L.map('mapa', { zoomControl: false, minZoom: 3, maxBounds: [[-85, -180], [85, 180]], maxBoundsViscosity: 1.0 }).setView([-23.55, -46.63], 13);
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19, noWrap: true, bounds: [[-85, -180], [85, 180]], attribution: 'Tiles © Esri — © OpenStreetMap contributors'
         }).addTo(mapa);
         camadaBB = L.layerGroup().addTo(mapa);
+        camadaPets = L.layerGroup().addTo(mapa);
         mapa.on('click', (e) => { if (ehAdmin()) abrirModalBB(null, e.latlng); });
         mapa.on('locationfound', (e) => {
+            ultimoPonto = e.latlng;
+            if (!centralizou) { centralizou = true; mapa.setView(e.latlng, 16); }
             if (meuPonto) meuPonto.remove();
             meuPonto = L.circleMarker(e.latlng, { radius: 8, color: '#fff', weight: 3, fillColor: '#2979FF', fillOpacity: 1 }).addTo(mapa);
         });
@@ -2660,9 +3136,11 @@
     function desenharBB() {
         if (!mapa || !camadaBB) return;
         camadaBB.clearLayers();
+        desenharPets();
         const admin = ehAdmin();
         bebedouros.forEach((b, id) => {
             const st = STATUS_BB[b.status] ? b.status : 'vazio';
+            if (!filtroMapa[st]) return;
             const icone = L.divIcon({ className: '', html: `<div class="bb-pin ${st}">${PAW}</div>`, iconSize: [40, 40], iconAnchor: [20, 20] });
             const m = L.marker([b.lat, b.lng], { icon: icone }).addTo(camadaBB);
             if (admin) {
@@ -2672,6 +3150,44 @@
                 m.bindPopup(`<strong>${escapeHtml(b.nome)}</strong><br>Nível: ${STATUS_BB[st]}${t ? '<br><small>Atualizado ' + t + '</small>' : ''}`);
             }
         });
+    }
+
+    // ---------- PETS PARA ADOÇÃO NO MAPA ----------
+    // O endereço do pet é só o texto "Onde o pet está?" (bairro/cidade). Convertemos em coordenadas
+    // aproximadas (com guardado no aparelho) e espalhamos um pouco os pins para não ficarem empilhados.
+    const geoCache = (() => { try { return JSON.parse(localStorage.getItem('helpet_geo') || '{}'); } catch (e) { return {}; } })();
+    let petsDesenho = 0;
+    async function coordenadasDoLocal(local) {
+        const chave = String(local || '').trim().toLowerCase();
+        if (!chave || chave.startsWith('localização não informada')) return null;
+        if (chave in geoCache) return geoCache[chave];
+        let pos = null;
+        try {
+            const r = await geocodificar(local);
+            if (r && r[0]) pos = { lat: r[0].lat, lng: r[0].lng };
+        } catch (e) { return null; }   // falha de rede: tenta de novo na próxima vez
+        geoCache[chave] = pos;
+        try { localStorage.setItem('helpet_geo', JSON.stringify(geoCache)); } catch (e) {}
+        return pos;
+    }
+    async function desenharPets() {
+        if (!mapa || !camadaPets) return;
+        const vez = ++petsDesenho;
+        camadaPets.clearLayers();
+        if (!filtroMapa.pets) return;
+        for (const [id, p] of [...pets]) {
+            const base = await coordenadasDoLocal(p.local);
+            if (vez !== petsDesenho) return;      // chegou uma atualização mais nova
+            if (!base) continue;
+            let h = 0;
+            for (const ch of id) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+            const ang = (h % 360) * Math.PI / 180, raio = 0.001 + (((h >>> 8) % 100) / 100) * 0.003;
+            const lat = base.lat + Math.sin(ang) * raio, lng = base.lng + Math.cos(ang) * raio;
+            const icone = L.divIcon({ className: '', html: `<div class="pet-pin"><img src="${escapeHtml(p.imagem)}" alt=""></div>`, iconSize: [44, 44], iconAnchor: [22, 22] });
+            L.marker([lat, lng], { icon: icone }).addTo(camadaPets).bindPopup(
+                `<strong>${escapeHtml(p.nome)}</strong><br>${escapeHtml(p.local || '')}<br><a href="#" onclick="abrirPet('${id}'); return false;" style="color:#20B2AA; font-weight:bold;">Ver pet</a>`
+            );
+        }
     }
 
     function iniciarListenerBebedouros() {
@@ -2691,14 +3207,14 @@
             if (!mapa) return;
             mapa.invalidateSize();
             desenharBB();
-            if (!jaLocalizou) { jaLocalizou = true; mapa.locate({ setView: true, maxZoom: 16 }); }
+            if (!jaLocalizou) { jaLocalizou = true; mapa.locate({ watch: true, enableHighAccuracy: true, setView: false }); }
         }, 150);
     };
 
     window.localizarMe = function () {
         if (!mapa) return;
         pediuLocal = true;
-        mapa.locate({ setView: true, maxZoom: 17 });
+        if (ultimoPonto) mapa.setView(ultimoPonto, 17); else mapa.locate({ watch: true, enableHighAccuracy: true, setView: true, maxZoom: 17 });
     };
 
     window.abrirModalBB = function (id, latlng) {
@@ -2795,6 +3311,196 @@
         }
     };
 
+        // ---------- BUSCA ----------
+    let termoBusca = '';
+    const norm = (s) => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    function renderPetsHome() {
+        if (!petsProntos) return;
+        const lista = [...pets].filter(([, p]) => !termoBusca || norm([p.nome, p.local, p.descricao, p.donoNome, p.sexo, p.porte].join(' ')).includes(termoBusca));
+        $('lista-pets').innerHTML = pets.size === 0
+            ? '<p class="text-center" style="color:var(--text-muted);">Nenhum pet para adoção ainda. Toque no + para publicar o primeiro!</p>'
+            : lista.length === 0 ? '<p class="text-center" style="color:var(--text-muted);">Nenhum pet encontrado.</p>'
+            : lista.map(([id, p]) => renderizarPet(id, p)).join('');
+    }
+    function renderCampanhasHome() {
+        if (!campsProntas) return;
+        const lista = [...campanhas].filter(([, c]) => !termoBusca || norm([c.titulo, c.descricao, c.donoNome, ...(c.itens || []).map(i => i.nome)].join(' ')).includes(termoBusca));
+        $('conteudo-campanhas').innerHTML = campanhas.size === 0
+            ? '<p class="text-center" style="color:var(--text-muted);">Nenhuma campanha ainda. Seja o primeiro a criar!</p>'
+            : lista.length === 0 ? '<p class="text-center" style="color:var(--text-muted);">Nenhuma campanha encontrada.</p>'
+            : lista.map(([id, c]) => renderizarCampanha(id, c)).join('');
+    }
+    let perfisCache = null, perfisCarregando = null;
+    async function renderBuscaPessoas() {
+        const box = $('busca-pessoas');
+        if (termoBusca.length < 2) { box.classList.add('hidden'); box.innerHTML = ''; return; }
+        if (!perfisCache) {
+            perfisCarregando ||= getDocs(collection(db, "perfis"))
+                .then(sn => { perfisCache = sn.docs.map(d => ({ uid: d.id, ...d.data() })); setTimeout(() => { perfisCache = null; }, 60000); })
+                .catch(e => { console.warn("Busca de pessoas:", e); perfisCache = []; })
+                .finally(() => { perfisCarregando = null; });
+            await perfisCarregando;
+        }
+        if (termoBusca.length < 2 || !perfisCache) return;
+        const achados = perfisCache.filter(p => p.nome && !p.oculto && norm(p.nome).includes(termoBusca)).slice(0, 8);
+        box.classList.toggle('hidden', achados.length === 0);
+        box.innerHTML = achados.length ? `
+            <h3 class="section-title" style="margin-top:0;">Pessoas</h3>
+            <div class="list-box" style="margin-bottom:20px;">
+                ${achados.map(p => `
+                <div class="chat-list-item clickable" onclick="abrirPerfil('${p.uid}')">
+                    <img src="${escapeHtml(p.foto || avatarPadrao(p.nome))}" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover;">
+                    <div class="chat-list-main"><span class="chat-list-name">${escapeHtml(p.nome)}</span></div>
+                </div>`).join('')}
+            </div>` : '';
+    }
+    $('busca-global').addEventListener('input', (e) => {
+        termoBusca = norm(e.target.value.trim());
+        document.querySelector('.welcome-card').classList.toggle('hidden', termoBusca.length > 0);
+        renderPetsHome(); renderCampanhasHome(); renderBuscaPessoas();
+    });
+
+    // ---------- LOCAL PADRÃO DO PET (vem do cadastro) ----------
+    async function prepararLocalPadrao() {
+        const e = dadosUsuario.endereco || {};
+        let { cidade, uf } = e;
+        if (!cidade && e.cep) {
+            try {
+                const r = await fetch(`https://viacep.com.br/ws/${String(e.cep).replace(/\D/g, '')}/json/`);
+                const d = await r.json();
+                if (!d.erro) { cidade = d.localidade; uf = d.uf; }
+            } catch (err) {}
+        }
+        const local = [e.bairro, cidade ? (uf ? `${cidade} - ${uf}` : cidade) : ''].filter(Boolean).join(', ');
+        const inp = $('input-pet-local');
+        if (inp && local && !inp.value) inp.value = local;
+    }
+
+    // ---------- BUSCA DE RUA NO MAPA ----------
+    let buscaMapaTimer = null, marcadorBusca = null, resultadosMapa = [];
+    async function geocodificar(q) {
+        const c = mapa ? mapa.getCenter() : { lat: -23.55, lng: -46.63 };
+        try {
+            const r = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=6&lat=${c.lat}&lon=${c.lng}`);
+            if (!r.ok) throw new Error(r.status);
+            const j = await r.json();
+            return (j.features || []).map(f => {
+                const pr = f.properties || {};
+                const nome = [pr.name || pr.street, pr.housenumber].filter(Boolean).join(', ');
+                const resto = [pr.district || pr.suburb, pr.city || pr.town, pr.state].filter(Boolean).join(', ');
+                return { titulo: nome || resto, sub: nome ? resto : '', lat: f.geometry.coordinates[1], lng: f.geometry.coordinates[0] };
+            }).filter(i => i.titulo);
+        } catch (e) {
+            const r = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&q=${encodeURIComponent(q)}`);
+            const j = await r.json();
+            return j.map(x => {
+                const partes = x.display_name.split(',');
+                return { titulo: partes.slice(0, 2).join(','), sub: partes.slice(2, 4).join(','), lat: +x.lat, lng: +x.lon };
+            });
+        }
+    }
+    async function buscarNoMapa() {
+        const q = $('mapa-busca-input').value.trim();
+        const box = $('mapa-resultados');
+        if (q.length < 3) { box.classList.add('hidden'); return; }
+        box.innerHTML = '<div class="mapa-res-item">Buscando…</div>';
+        box.classList.remove('hidden');
+        try {
+            resultadosMapa = await geocodificar(q);
+            box.innerHTML = resultadosMapa.length
+                ? resultadosMapa.map((i, n) => `<div class="mapa-res-item" onclick="escolherBuscaMapa(${n})">${escapeHtml(i.titulo)}<small>${escapeHtml(i.sub)}</small></div>`).join('')
+                : '<div class="mapa-res-item">Nenhum resultado.</div>';
+        } catch (e) {
+            console.warn("Busca de endereço:", e);
+            box.innerHTML = '<div class="mapa-res-item">Busca indisponível no momento.</div>';
+        }
+    }
+    window.escolherBuscaMapa = function (n) {
+        const i = resultadosMapa[n];
+        if (!i) return;
+        iniciarMapa();
+        if (!mapa) return;
+        mapa.setView([i.lat, i.lng], 17);
+        if (marcadorBusca) marcadorBusca.remove();
+        marcadorBusca = L.circleMarker([i.lat, i.lng], { radius: 9, color: '#fff', weight: 3, fillColor: '#FF8C00', fillOpacity: 1 }).addTo(mapa).bindPopup(escapeHtml(i.titulo)).openPopup();
+        $('mapa-busca-input').value = i.titulo;
+        $('mapa-resultados').classList.add('hidden');
+    };
+    $('mapa-busca-input').addEventListener('input', () => { clearTimeout(buscaMapaTimer); buscaMapaTimer = setTimeout(buscarNoMapa, 450); });
+    $('mapa-busca-input').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); clearTimeout(buscaMapaTimer); buscarNoMapa().then(() => { if (resultadosMapa.length) window.escolherBuscaMapa(0); }); }
+    });
+    document.addEventListener('click', (e) => { if (!e.target.closest('.mapa-busca')) $('mapa-resultados').classList.add('hidden'); });
+
+    // ---------- FOTOS DE PERFIL NAS LISTAS ----------
+    const fotosCache = new Map();
+    async function fotoDe(uid) {
+        if (fotosCache.has(uid)) return fotosCache.get(uid);
+        let f = '';
+        try { const sn = await getDoc(doc(db, "perfis", uid)); f = sn.exists() ? (sn.data().foto || '') : ''; } catch (e) {}
+        fotosCache.set(uid, f); return f;
+    }
+    function aplicarFotos() {
+        document.querySelectorAll('[data-foto-uid]').forEach(async (el) => {
+            const uid = el.dataset.fotoUid;
+            if (!uid || el.dataset.fotoOk) return;
+            el.dataset.fotoOk = '1';
+            const f = await fotoDe(uid);
+            if (f) el.innerHTML = `<img src="${escapeHtml(f)}" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+        });
+    }
+    let timerFotos = null;
+    new MutationObserver(() => { clearTimeout(timerFotos); timerFotos = setTimeout(aplicarFotos, 60); })
+        .observe(document.querySelector('.app-container'), { childList: true, subtree: true });
+
+    // ---------- BOTÃO VOLTAR DO CELULAR ----------
+    function restaurarTela(id) {
+        window.__restaurando = true;
+        try {
+            const navs = document.querySelectorAll('.nav-item');
+            if (id === 'app-chat-room') { if (conversaAtual) { navegarApp('app-chat-room', null); escutarMensagens(); } else window.abrirListaChats(); }
+            else if (id === 'app-perfil') window.abrirPerfil(perfilAlvo?.uid, perfilAlvo?.nome);
+            else if (id === 'app-chats') window.abrirListaChats();
+            else if (id === 'app-notificacoes') window.abrirNotificacoes();
+            else if (id === 'app-mapa') window.abrirMapa(navs[2]);
+            else if (id === 'app-home') navegarApp('app-home', navs[0]);
+            else navegarApp(id, null);
+        } finally { window.__restaurando = false; }
+    }
+    window.addEventListener('popstate', () => {
+        if (window.__ignorarPop) { window.__ignorarPop = false; return; }
+        const prev = window.pilhaTelas.pop();
+        if (prev) restaurarTela(prev);
+    });
+
+    // ---------- ÁUDIO NO CHAT ----------
+    let gravador = null, pedacosAudio = [], timerAudio = null;
+    $('chat-mic').addEventListener('click', async () => {
+        const btn = $('chat-mic');
+        if (gravador) { gravador.stop(); return; }
+        if (!navigator.mediaDevices || !window.MediaRecorder) { alert("Gravação de áudio não é suportada neste aparelho."); return; }
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            pedacosAudio = [];
+            const g = new MediaRecorder(stream);
+            gravador = g;
+            g.ondataavailable = (e) => { if (e.data && e.data.size) pedacosAudio.push(e.data); };
+            g.onstop = async () => {
+                clearTimeout(timerAudio);
+                stream.getTracks().forEach(t => t.stop());
+                btn.classList.remove('gravando');
+                gravador = null;
+                const blob = new Blob(pedacosAudio, { type: g.mimeType || 'audio/webm' });
+                const dataUrl = await new Promise(ok => { const fr = new FileReader(); fr.onload = () => ok(fr.result); fr.readAsDataURL(blob); });
+                if (dataUrl.length > 700000) { alert("Áudio muito longo. Grave até cerca de 40 segundos."); return; }
+                await enviarMensagem(null, dataUrl);
+            };
+            g.start();
+            btn.classList.add('gravando');
+            timerAudio = setTimeout(() => { if (gravador) gravador.stop(); }, 40000);
+        } catch (e) { console.warn(e); alert("Não foi possível usar o microfone. Permita o acesso nas configurações do aparelho."); }
+    });
+
     // ---------- LOGIN / CADASTRO ----------
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -2838,11 +3544,13 @@
                 await setDoc(doc(db, "usuarios", cred.user.uid), {
                     nome: nome,
                     email: email,
-                    endereco: { cep: cep, rua: rua, numero: numero, bairro: bairro, complemento: complemento },
+                    endereco: { cep: cep, rua: rua, numero: numero, bairro: bairro, complemento: complemento, cidade: document.getElementById('reg-cidade').value, uf: document.getElementById('reg-uf').value },
                     criadoEm: serverTimestamp()
                 });
                 try { await setDoc(doc(db, "perfis", cred.user.uid), { nome: nome, foto: '' }, { merge: true }); } catch (e) { console.warn(e); }
                 nomeUsuario = nome;
+                dadosUsuario = { nome, email, endereco: { cep, rua, numero, bairro, complemento, cidade: document.getElementById('reg-cidade').value, uf: document.getElementById('reg-uf').value } };
+                prepararLocalPadrao();
                 atualizarSaudacao();
                 alert("Cadastro realizado com sucesso!");
             } catch (error) {
